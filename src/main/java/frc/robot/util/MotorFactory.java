@@ -3,6 +3,7 @@ package frc.robot.util;
 import java.io.IOError;
 import java.io.IOException;
 
+import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.VoltageConfigs;
@@ -66,7 +67,7 @@ public class MotorFactory {
      * defaults it is recommended to use the other createTalonFX.. methods.
      *
      * @param id                     the CAN ID of the TalonFX
-     * @param CANBus                 the CAN bus the TalonFX is on. If connected to the rio it is "rio".
+     * @param cANBus                 the CAN bus the TalonFX is on. If connected to the rio it is "rio".
      * @param StatorLimitEnable      whether to enable stator limiting
      * @param StatorCurrentLimit     the current, in amps, to return to after the
      *                               stator limit is triggered
@@ -83,7 +84,7 @@ public class MotorFactory {
      *                               the threshold before triggering
      * @return A fully configured TalonFX
      */
-    public static TalonFX createTalonFXFull(int id, String CANBus, boolean StatorLimitEnable,
+    public static TalonFX createTalonFXFull(int id, String cANBus, boolean StatorLimitEnable,
                                                 double StatorCurrentLimit,
                                                 double StatorTriggerThreshold, double StatorTriggerDuration, boolean SupplyLimitEnable, double SupplyCurrentLimit,
                                                 double SupplyTriggerThreshold, double SupplyTriggerDuration) {
@@ -92,7 +93,7 @@ public class MotorFactory {
             return null;
         }
 
-        TalonFX talon = new TalonFX(id, CANBus);
+        TalonFX talon = new TalonFX(id, cANBus);
 
         if (RobotBase.isReal() && talon.getVersion().getValue() != Constants.FIRMWARE_VERSION) {
             String errorMessage = "TalonFX " + id + " firmware incorrect. Has " + talon.getVersion().getValue()
@@ -109,13 +110,12 @@ public class MotorFactory {
 
         // See explanations for Supply and Stator limiting in FalconConstants.java
         config.CurrentLimits = new CurrentLimitsConfigs().withStatorCurrentLimitEnable(StatorLimitEnable).withStatorCurrentLimit(StatorCurrentLimit).
-            withSupplyCurrentLimitEnable(SupplyLimitEnable).withSupplyCurrentLimit(SupplyCurrentLimit).
-            withSupplyCurrentThreshold(SupplyTriggerThreshold).withSupplyTimeThreshold(SupplyTriggerDuration);
+            withSupplyCurrentLimitEnable(SupplyLimitEnable).withSupplyCurrentLimit(SupplyCurrentLimit).withSupplyCurrentLimit(SupplyTriggerThreshold).withSupplyCurrentLowerTime(SupplyTriggerDuration);
 
         config.Voltage = new VoltageConfigs().withPeakForwardVoltage(Constants.ROBOT_VOLTAGE);
 
         talon.getConfigurator().apply(config);
-        talon.setNeutralMode(NeutralModeValue.Brake);
+        talon.configNeutralMode(NeutralModeValue.Brake);
 
         return talon;
     }

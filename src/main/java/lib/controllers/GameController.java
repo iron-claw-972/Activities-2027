@@ -2,6 +2,7 @@ package lib.controllers;
 
 import org.wpilib.driverstation.GenericHID.RumbleType;
 import org.wpilib.driverstation.Joystick;
+import org.wpilib.driverstation.POVDirection;
 import org.wpilib.command2.button.Trigger;
 
 import java.util.function.BooleanSupplier;
@@ -65,19 +66,19 @@ public class GameController extends Controller {
     }
 
     public enum DPad {
-        UNPRESSED(-1),
-        UP(0),
-        UP_RIGHT(45),
-        RIGHT(90),
-        DOWN_RIGHT(135),
-        DOWN(180),
-        DOWN_LEFT(235),
-        LEFT(270),
-        UP_LEFT(315);
+        UNPRESSED(POVDirection.CENTER),
+        UP(POVDirection.UP),
+        UP_RIGHT(POVDirection.UP_RIGHT),
+        RIGHT(POVDirection.RIGHT),
+        DOWN_RIGHT(POVDirection.DOWN_RIGHT),
+        DOWN(POVDirection.DOWN),
+        DOWN_LEFT(POVDirection.DOWN_LEFT),
+        LEFT(POVDirection.LEFT),
+        UP_LEFT(POVDirection.UP_LEFT);
 
-        public final int angle;
+        public final POVDirection angle;
 
-        DPad(final int angle) {
+        DPad(final POVDirection angle) {
             this.angle = angle;
         }
     }
@@ -110,7 +111,7 @@ public class GameController extends Controller {
     }
 
     public void setRumble(RumbleStatus rumbleStatus) {
-        controller.setRumble(RumbleType.kLeftRumble, rumbleStatus.rumbleValue);
-        controller.setRumble(RumbleType.kRightRumble, rumbleStatus.rumbleValue);
+        controller.setRumble(RumbleType.LEFT_RUMBLE, rumbleStatus.rumbleValue);
+        controller.setRumble(RumbleType.RIGHT_RUMBLE, rumbleStatus.rumbleValue);
     }
 }
