@@ -1,8 +1,6 @@
 package frc.robot.util;
 
-import org.wpilib.util.datalog.DataLog;
-import org.wpilib.util.datalog.IntegerLogEntry;
-import org.wpilib.util.datalog.StringLogEntry;
+import org.wpilib.datalog.*;
 import org.wpilib.system.DataLogManager;
 import frc.robot.constants.Constants;
 

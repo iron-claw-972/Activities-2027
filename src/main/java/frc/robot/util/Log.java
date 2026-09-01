@@ -1,10 +1,13 @@
 package frc.robot.util;
 
-import org.wpilib.util.datalog.*;
+
 
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.function.Supplier;
+
+import org.wpilib.datalog.*;
+import org.wpilib.system.DataLogManager;
 
 public class Log<T> {
     private final String name;
@@ -23,13 +26,13 @@ public class Log<T> {
         this.value = supplier.get();
 
         if (isInteger()) {
-            logEntry = new IntegerLogEntry(LogManager.DATA_LOG, name);
+            logEntry = new IntegerLogEntry(DataLogManager.getLog(), name);
         } else if (isDouble()) {
-            logEntry = new DoubleLogEntry(LogManager.DATA_LOG, name);
+            logEntry = new DoubleLogEntry(DataLogManager.getLog(), name);
         } else if (isIntegerArray()) {
-            logEntry = new IntegerArrayLogEntry(LogManager.DATA_LOG, name);
+            logEntry = new IntegerArrayLogEntry(DataLogManager.getLog(), name);
         } else if (isDoubleArray()) {
-            logEntry = new DoubleArrayLogEntry(LogManager.DATA_LOG, name);
+            logEntry = new DoubleArrayLogEntry(DataLogManager.getLog(), name);
         } else {
             throw new IllegalArgumentException("Unsupported log type: " + value.getClass());
         }

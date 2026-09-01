@@ -34,7 +34,6 @@ public class Robot extends TimedRobot {
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  @Override
   public void robotInit() {
 
     // This is really annoying so it's disabled
@@ -117,7 +116,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {}
 
-  @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
@@ -130,7 +128,6 @@ public class Robot extends TimedRobot {
   }
 
   /** This function is called periodically during test mode. */
-  @Override
   public void testPeriodic() {}
 
   /**

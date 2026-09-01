@@ -15,7 +15,7 @@ public class SysIDDriveCommand extends SequentialCommandGroup {
     private SysId sysId;
     public SysIDDriveCommand(Drivetrain drive) {
         config = new Config(
-            Units.Volts.of(0.5).per(Units.Seconds.of(1)),
+            Units.Volts.of(0.5).per(Units.Seconds),
             Units.Volts.of(3),
             Units.Seconds.of(6),
             (x)->SignalLogger.writeString("state", x.toString())

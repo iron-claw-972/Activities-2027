@@ -12,6 +12,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig;
 
 import org.wpilib.driverstation.DriverStation;
 import org.wpilib.framework.RobotBase;
@@ -84,7 +85,7 @@ public class MotorFactory {
      *                               the threshold before triggering
      * @return A fully configured TalonFX
      */
-    public static TalonFX createTalonFXFull(int id, String cANBus, boolean StatorLimitEnable,
+    public static TalonFX createTalonFXFull(int id, CANBus cANBus, boolean StatorLimitEnable,
                                                 double StatorCurrentLimit,
                                                 double StatorTriggerThreshold, double StatorTriggerDuration, boolean SupplyLimitEnable, double SupplyCurrentLimit,
                                                 double SupplyTriggerThreshold, double SupplyTriggerDuration) {
