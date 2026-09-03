@@ -3,8 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.util;
-import org.wpilib.units.Measure;
-import org.wpilib.units.Voltage;
+import org.wpilib.units.measure.Voltage;
 import org.wpilib.sysid.SysIdRoutineLog;
 import org.wpilib.command2.Command;
 import org.wpilib.command2.Subsystem;
@@ -21,7 +20,7 @@ public class SysId {
 
     SysIdRoutine sysIdRoutine;
 
-    public SysId(String name, Consumer<Measure<Voltage>> driveConsumer, Consumer<SysIdRoutineLog> logConsumer, Subsystem subsystem, Config config){
+    public SysId(String name, Consumer<Voltage> driveConsumer, Consumer<SysIdRoutineLog> logConsumer, Subsystem subsystem, Config config){
         sysIdRoutine = new SysIdRoutine(
             config,
             new Mechanism(
@@ -32,7 +31,7 @@ public class SysId {
             )
         );
     }
-    public SysId(String name, Consumer<Measure<Voltage>> driveConsumer, Subsystem subsystem, Config config){
+    public SysId(String name, Consumer<Voltage> driveConsumer, Subsystem subsystem, Config config){
         this(name,driveConsumer,null,subsystem,config);
     }
 

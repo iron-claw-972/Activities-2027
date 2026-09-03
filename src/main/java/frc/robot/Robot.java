@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import org.wpilib.driverstation.DriverStation;
+import org.wpilib.driverstation.internal.DriverStationBackend;
 import org.wpilib.framework.TimedRobot;
 import org.wpilib.command2.Command;
 import org.wpilib.command2.CommandScheduler;
@@ -37,7 +37,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     // This is really annoying so it's disabled
-    DriverStation.silenceJoystickConnectionWarning(true);
+    DriverStationBackend.silenceJoystickConnectionWarning(true);
 
     // make subsystems
     drive = new Drivetrain();
@@ -92,7 +92,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     isTestMode = false;
     if (autoCommand != null) {
-      autoCommand.schedule();
+      CommandScheduler.getInstance().schedule(autoCommand);
     }
   }
 

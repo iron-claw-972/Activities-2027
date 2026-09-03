@@ -5,8 +5,9 @@
 package frc.robot.util.ShuffleBoard;
 
 import org.wpilib.math.geometry.Pose2d;
-import org.wpilib.shuffleboard.Shuffleboard;
 import org.wpilib.smartdashboard.Field2d;
+import org.wpilib.smartdashboard.SmartDashboard;
+
 import frc.robot.subsystems.Drivetrain;
 
 /** Add your docs here. */
@@ -17,7 +18,7 @@ public class Field {
     
     public Field(Drivetrain drive){
         this.drive = drive;
-        Shuffleboard.getTab("Drive").add(field);
+        SmartDashboard.getTab("Drive").add(field);
     } 
     
     public void updateModulePositions(){
